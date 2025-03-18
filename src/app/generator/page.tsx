@@ -10,7 +10,12 @@ type Product = {
 };
 
 type SubmissionType = "PERORANGAN" | "BADAN_USAHA";
-type MinimalistOption = "NONE" | "OPSI_1" | "OPSI_2" | "OPSI_3" | "OPSI_4";
+type MinimalistOption =
+  | "NONE"
+  | "KONSEP_1"
+  | "KONSEP_2"
+  | "KONSEP_3"
+  | "KONSEP_4";
 
 const generateText = (
   brandName: string,
@@ -24,25 +29,25 @@ const generateText = (
   switch (submissionType) {
     case "PERORANGAN":
       if (minimalistOption === "NONE") {
-        header += `Berikut kami kirimkan artwork desain label merk ${brandName} dengan pengajuan perorangan dengan nama produk:\n\n`;
+        header += `Berikut kami kirimkan artwork desain label merk *${brandName}* dengan pengajuan Perorangan dengan nama produk:\n\n`;
       } else {
         const optionNumber = minimalistOption.split("_")[1];
-        header += `Berikut kami kirimkan artwork Minimalist Opsi ${optionNumber} desain label merk ${brandName} dengan pengajuan perorangan dengan nama produk:\n\n`;
+        header += `Berikut kami kirimkan artwork *MINIMALIS* Konsep ${optionNumber} desain label merk *${brandName}* dengan pengajuan Perorangan dengan nama produk:\n\n`;
       }
       break;
     case "BADAN_USAHA":
       if (minimalistOption === "NONE") {
-        header += `Berikut kami kirimkan artwork desain label merk ${brandName} dengan pengajuan Badan Usaha ${businessEntity} dengan nama produk:\n\n`;
+        header += `Berikut kami kirimkan artwork desain label merk *${brandName}* dengan pengajuan Badan Usaha ${businessEntity} dengan nama produk:\n\n`;
       } else {
         const optionNumber = minimalistOption.split("_")[1];
-        header += `Berikut kami kirimkan artwork Minimalist Opsi ${optionNumber} desain label merk ${brandName} dengan pengajuan Badan Usaha ${businessEntity} dengan nama produk:\n\n`;
+        header += `Berikut kami kirimkan artwork *MINIMALIS* Konsep ${optionNumber} desain label merk *${brandName}* dengan pengajuan Badan Usaha ${businessEntity} dengan nama produk:\n\n`;
       }
       break;
   }
 
   const productList = products
     .map(
-      (product, index) => `${index + 1}. ${brandName} ${product.namaProduk}
+      (product, index) => `*${index + 1}. ${brandName} ${product.namaProduk}*
 - Kemasan ${product.kemasan}
 - Bahan ${product.bahan}
 `
@@ -179,24 +184,26 @@ function App() {
                       />
                       <span className="ml-2">None</span>
                     </label>
-                    {["OPSI_1", "OPSI_2", "OPSI_3", "OPSI_4"].map((option) => (
-                      <label key={option} className="flex items-center">
-                        <input
-                          type="radio"
-                          value={option}
-                          checked={minimalistOption === option}
-                          onChange={(e) =>
-                            setMinimalistOption(
-                              e.target.value as MinimalistOption
-                            )
-                          }
-                          className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                        />
-                        <span className="ml-2">
-                          Opsi {option.split("_")[1]}
-                        </span>
-                      </label>
-                    ))}
+                    {["KONSEP_1", "KONSEP_2", "KONSEP_3", "KONSEP_4"].map(
+                      (option) => (
+                        <label key={option} className="flex items-center">
+                          <input
+                            type="radio"
+                            value={option}
+                            checked={minimalistOption === option}
+                            onChange={(e) =>
+                              setMinimalistOption(
+                                e.target.value as MinimalistOption
+                              )
+                            }
+                            className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                          />
+                          <span className="ml-2">
+                            Konsep {option.split("_")[1]}
+                          </span>
+                        </label>
+                      )
+                    )}
                   </div>
                 </div>
 
