@@ -2,7 +2,6 @@
 
 import { LucideIcon, LayoutDashboard, Layers } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import Item from "./Item";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
