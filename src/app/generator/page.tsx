@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Copy, CheckCircle2, Type, Plus, Trash2 } from "lucide-react";
+import { Copy, CheckCircle2, Plus, Trash2, Paintbrush } from "lucide-react";
 
 type Product = {
   namaProduk: string;
@@ -111,8 +111,10 @@ function App() {
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="flex items-center gap-3 mb-6">
-            <Type className="w-8 h-8 text-indigo-600" />
-            <h1 className="text-2xl font-bold text-gray-800">Text Generator</h1>
+            <Paintbrush className="w-8 h-8 text-indigo-600" />
+            <h1 className="text-2xl font-bold text-gray-800">
+              Design Text Generator
+            </h1>
           </div>
 
           <div className="space-y-6">
@@ -121,14 +123,14 @@ function App() {
                 htmlFor="brandName"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
-                Brand Name
+                Nama Brand
               </label>
               <input
                 type="text"
                 id="brandName"
                 value={brandName}
                 onChange={(e) => setBrandName(e.target.value)}
-                placeholder="Enter brand name..."
+                placeholder="Masukkan nama Brand e.g., Fourmskin"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
@@ -167,7 +169,7 @@ function App() {
 
                 <div className="mt-3 space-y-2">
                   <label className="block text-sm font-medium text-gray-700">
-                    Minimalist Option
+                    Miinimalis
                   </label>
                   <div className="grid grid-cols-2 gap-3">
                     <label className="flex items-center">
@@ -222,7 +224,7 @@ function App() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-gray-700">
-                  Products
+                  List Produk
                 </h2>
               </div>
 
@@ -233,7 +235,7 @@ function App() {
                 >
                   <div className="flex justify-between items-center">
                     <h3 className="font-medium text-gray-700">
-                      Product {index + 1}
+                      Produk {index + 1}
                     </h3>
                     {products.length > 1 && (
                       <button
