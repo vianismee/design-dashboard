@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import Headers from "@/components/Header/Headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +33,12 @@ export default function RootLayout({
           <div className="w-[15%] h-screen ">
             <Sidebar />
           </div>
-          <div className="grow h-screen overflow-scroll">{children}</div>
+          <div className="grow h-screen flex flex-col">
+            <Headers />
+            <div className="overflow-x-scroll bg-sky-100 rounded-2xl scrollbar-hide">
+              {children}
+            </div>
+          </div>
         </div>
       </body>
     </html>

@@ -107,7 +107,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-6 text-black">
+    <div className="min-h-screen p-6 text-black">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="flex items-center gap-3 mb-6">
@@ -240,7 +240,7 @@ function App() {
                     {products.length > 1 && (
                       <button
                         onClick={() => removeProduct(index)}
-                        className="text-red-500 hover:text-red-700"
+                        className="text-red-500 hover:text-red-700 cursor-pointer"
                         title="Remove product"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -295,7 +295,7 @@ function App() {
               ))}
               <button
                 onClick={addProduct}
-                className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 flex items-center gap-2"
+                className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 flex items-center gap-2 cursor-pointer"
               >
                 <Plus className="w-4 h-4" />
                 Add Product
