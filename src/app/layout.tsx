@@ -39,7 +39,7 @@ export default function RootLayout({
           </div>
           <div className="grow h-screen flex flex-col">
             <Headers />
-            <div className="overflow-x-scroll bg-sky-100 rounded-2xl scrollbar-hide">
+            <div className="overflow-x-scroll bg-sky-100 rounded-2xl scrollbar-hide h-full px-[25px] py-[25px]">
               {children}
             </div>
           </div>
