@@ -1,6 +1,6 @@
 "use client";
 
-import { LucideIcon, LayoutDashboard, Layers } from "lucide-react";
+import { LucideIcon, LayoutDashboard, Layers, Weight } from "lucide-react";
 import Image from "next/image";
 import Item from "./Item";
 import { Avatar, AvatarFallback } from "../ui/avatar";
@@ -29,6 +29,11 @@ const items: SidebarItem[] = [
     path: "/generator",
     icon: Layers,
   },
+  {
+    name: "Mass Converter",
+    path: "/converter",
+    icon: Weight,
+  },
 ];
 
 export default function Sidebar() {
@@ -50,7 +55,7 @@ export default function Sidebar() {
         ))}
       </main>
       <footer className="h-[20%] flex flex-col justify-center px-3 items-center">
-        <div className="font-medium flex items-center gap-2">
+        <div className="font-medium flex items-center gap-3 justify-center">
           <Avatar>
             <AvatarImage src="https://avatars.githubusercontent.com/u/104370516?s=96&v=4" />
             <AvatarFallback>DG</AvatarFallback>
