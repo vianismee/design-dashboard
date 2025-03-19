@@ -8,7 +8,6 @@ export default function Hero() {
           <h1 className="font-bold text-5xl text-white">
             Welcome to Design <br /> Dashboard
           </h1>
-          <p className="font-semibold text-white">Hello World</p>
         </div>
       </div>
       <div className="grow  rounded-2xl p-4 bg-white">
