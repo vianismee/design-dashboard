@@ -1,6 +1,12 @@
 "use client";
 
-import { LucideIcon, LayoutDashboard, Layers, Weight } from "lucide-react";
+import {
+  LucideIcon,
+  LayoutDashboard,
+  Layers,
+  Weight,
+  Package,
+} from "lucide-react";
 import Image from "next/image";
 import Item from "./Item";
 import { Avatar, AvatarFallback } from "../ui/avatar";
@@ -33,6 +39,11 @@ const items: SidebarItem[] = [
     name: "Mass Converter",
     path: "/converter",
     icon: Weight,
+  },
+  {
+    name: "Kemasan Baru",
+    path: "/kemasanbaru",
+    icon: Package,
   },
 ];
 
