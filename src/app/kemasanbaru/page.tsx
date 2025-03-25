@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -30,34 +33,45 @@ const types = {
 };
 
 const packaging = [
-  {
-    id: 1,
-    brand: "Shineskin",
-    nama: "Pot Acrylic Jernih Tutup Putih 10g",
-    type: "Pot",
-  },
-  {
-    id: 2,
-    brand: "Shineskin",
-    nama: "Pot Acrylic Jernih Tutup Putih 10g",
-    type: "Pot",
-  },
+  { id: 1, brand: "Shineskin", nama: "Pot Acrylic Jernih 10g", type: "Pot" },
 ];
 
 export default function KemasanBaru() {
+  const [search, setSearch] = useState("");
+
+  // Filter data berdasarkan pencarian
+  const filteredData = packaging.filter(
+    (pack) =>
+      pack.brand.toLowerCase().includes(search.toLowerCase()) ||
+      pack.nama.toLowerCase().includes(search.toLowerCase()) ||
+      pack.type.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Tentukan data yang akan ditampilkan
+  const displayedData = search === "" ? packaging : filteredData;
+
   return (
-    <main className="flex flex-col gap-[20px] h-full">
-      <div className="w-full bg-white py-5 px-6 rounded-lg flex h-[15%] grow-0">
+    <main className="flex flex-col gap-5 h-full">
+      <div className="w-full bg-white py-5 px-6 rounded-lg flex h-[15%]">
         <h1 className="text-2xl font-bold flex items-center gap-3">
           <Package width={40} height={40} className="text-indigo-600" />
           Kemasan Baru
         </h1>
       </div>
-      <div className="grow bg-white h-full w-auto rounded-lg py-5 px-6 flex flex-col overflow-hidden gap-2">
-        <div className="h-[10%] flex items-center px-2 justify-between">
+
+      <div className="grow bg-white w-auto rounded-lg py-5 px-6 flex flex-col overflow-hidden gap-4">
+        <div className="flex items-center justify-between">
+          {/* Input pencarian */}
+          <Input
+            placeholder="Cari kemasan..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-1/3"
+          />
+
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="bg-indigo-600 cursor-pointer">
+              <Button className="bg-indigo-600">
                 <Plus width={10} height={10} />
                 Add Packaging
               </Button>
@@ -77,7 +91,7 @@ export default function KemasanBaru() {
                 <div className="flex gap-5">
                   <Label className="w-[30%]">Nama Kemasan</Label>
                   <Input
-                    placeholder="e.g., Pot Acrylic Jernih Tutup Putih 10g"
+                    placeholder="e.g., Pot Acrylic Jernih 10g"
                     className="grow"
                   />
                 </div>
@@ -86,35 +100,31 @@ export default function KemasanBaru() {
                   <div className="grow">
                     <Select>
                       <SelectTrigger>
-                        <SelectValue placeholder={"Tube"} />
+                        <SelectValue placeholder="Pilih jenis" />
                       </SelectTrigger>
                       <SelectContent>
-                        {Object.values(types)
-                          .flat()
-                          .map((type) => (
-                            <SelectItem value={type} key={type}>
-                              {type}
-                            </SelectItem>
-                          ))}
+                        {types.packaging.map((type) => (
+                          <SelectItem value={type} key={type}>
+                            {type}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
-                <Input
-                  type="file"
-                  id="picture"
-                  accept="image/png, image/jpeg"
-                />
-                <Button className="bg-indigo-600 cursor-pointer">
+                <Input type="file" accept="image/png, image/jpeg" />
+                <Button className="bg-indigo-600">
                   <PlusIcon /> Add Packaging
                 </Button>
               </div>
             </DialogContent>
           </Dialog>
         </div>
-        <div className="h-full overflow-scroll bg-white px-3 py-4">
-          <Table>
-            <TableHeader>
+
+        {/* Tabel Data */}
+        <div className="h-full overflow-auto bg-white px-3 py-4 border rounded-lg">
+          <Table className="w-full border-collapse">
+            <TableHeader className="sticky top-0 bg-white shadow-md z-10">
               <TableRow>
                 <TableHead>Brand</TableHead>
                 <TableHead>Nama Kemasan</TableHead>
@@ -123,19 +133,24 @@ export default function KemasanBaru() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {packaging.map((pack) => (
-                <TableRow key={pack.id}>
-                  <TableCell>{pack.brand}</TableCell>
-                  <TableCell>{pack.nama}</TableCell>
-                  <TableCell>{pack.type}</TableCell>
-                  <TableCell className="flex gap-3 items-center">
-                    <Button className="cursor-pointer flex gap-1 items-center bg-indigo-300">
-                      <Pencil /> Edit
-                    </Button>
-                    <Trash2 className="text-red-500 cursor-pointer" />
+              {displayedData.length > 0 ? (
+                displayedData.map((pack) => (
+                  <TableRow key={pack.id}>
+                    <TableCell>{pack.brand}</TableCell>
+                    <TableCell>{pack.nama}</TableCell>
+                    <TableCell>{pack.type}</TableCell>
+                    <TableCell className="flex gap-3 items-center">
+                      <Trash2 className="text-red-500 cursor-pointer" />
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={4} className="text-center">
+                    Data belum diinput.
                   </TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </div>
