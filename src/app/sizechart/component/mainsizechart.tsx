@@ -4,8 +4,12 @@ export default function MainSizeChart() {
   return (
     <Tabs defaultValue="account" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
+        <TabsTrigger value="account" className="cursor-pointer">
+          Account
+        </TabsTrigger>
+        <TabsTrigger value="password" className="cursor-pointer">
+          Password
+        </TabsTrigger>
       </TabsList>
       <TabsContent value="account">
         <div>Hello World</div>
