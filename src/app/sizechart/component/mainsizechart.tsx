@@ -1,21 +1,22 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import TableData from "./table";
 
 export default function MainSizeChart() {
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="account" className="cursor-pointer">
-          Account
+    <Tabs defaultValue="inhouse" className="w-full">
+      <TabsList className="grid grid-cols-2 w-[500px]">
+        <TabsTrigger value="inhouse" className="cursor-pointer">
+          In House
         </TabsTrigger>
-        <TabsTrigger value="password" className="cursor-pointer">
-          Password
+        <TabsTrigger value="customer" className="cursor-pointer">
+          Customer
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="account">
-        <div>Hello World</div>
+      <TabsContent className="overflow-scroll" value="inhouse">
+        <TableData filterType="In House" />
       </TabsContent>
-      <TabsContent value="password">
-        <div>Hello </div>
+      <TabsContent className="overflow-scroll" value="customer">
+        <TableData filterType="Customer" />
       </TabsContent>
     </Tabs>
   );

@@ -8,7 +8,7 @@ export default function SizeChart() {
         <PencilRuler width={40} height={40} className="text-indigo-600" />
         <h1 className="font-bold text-3xl">Size Chart</h1>
       </header>
-      <div className="w-full bg-white grow rounded-3xl px-5 py-5">
+      <div className="w-full bg-white grow rounded-3xl px-5 py-5 overflow-scroll">
         <MainSizeChart />
       </div>
     </main>

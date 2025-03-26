@@ -3,23 +3,16 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL") // Gunakan Supabase sebagai database
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Gunakan Supabase sebagai database
 }
 
 model Packaging {
-  id     Int     @id @default(autoincrement())
-  name   String
-  type   String
-  labels Label[]
-}
-
-model Label {
-  id          Int       @id @default(autoincrement())
-  width       Float
-  height      Float
-  shape       String
-  labelType   String
-  packagingId Int
-  Packaging   Packaging @relation(fields: [packagingId], references: [id])
+  id           Int     @id @default(autoincrement())
+  name         String
+  type         String
+  labelKemasan String
+  innerbox     String?
+  labelBulat   String?
 }
