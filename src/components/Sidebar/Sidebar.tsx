@@ -5,11 +5,8 @@ import {
   LayoutDashboard,
   Layers,
   Weight,
-<<<<<<< HEAD
   PencilRuler,
-=======
   Popcorn,
->>>>>>> c113a3d11483136b9d865f1fd6249cf4fcebeb88
 } from "lucide-react";
 import Image from "next/image";
 import Item from "./Item";
@@ -45,15 +42,14 @@ const items: SidebarItem[] = [
     icon: Weight,
   },
   {
-<<<<<<< HEAD
-    name: "Size Chart",
-    path: "/sizechart",
+    name: "Note",
+    path: "/note",
     icon: PencilRuler,
-=======
+  },
+  {
     name: "Snack",
     path: "/snack",
     icon: Popcorn,
->>>>>>> c113a3d11483136b9d865f1fd6249cf4fcebeb88
   },
 ];
 

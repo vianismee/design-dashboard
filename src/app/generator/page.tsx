@@ -107,7 +107,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen p-6 text-black">
+    <div className="min-h-screen p-6 text-black flex">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="flex items-center gap-3 mb-6">
