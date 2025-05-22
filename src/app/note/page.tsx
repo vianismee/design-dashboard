@@ -65,10 +65,7 @@ const NotePages = () => {
 
   const handleDeleteNote = async (noteId: number) => {
     try {
-      const { data, error } = await supabase
-        .from("notes")
-        .delete()
-        .eq("id", noteId);
+      const { error } = await supabase.from("notes").delete().eq("id", noteId);
       if (error) {
         console.log("Error deleting note:", error);
         toast.error("Gagal menghapus note");
