@@ -63,12 +63,31 @@ const NotePages = () => {
     }
   };
 
+  const handleDeleteNote = async (noteId: number) => {
+    try {
+      const { data, error } = await supabase
+        .from("notes")
+        .delete()
+        .eq("id", noteId);
+      if (error) {
+        console.log("Error deleting note:", error);
+        toast.error("Gagal menghapus note");
+      } else {
+        setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
+        toast("Note berhasil dihapus");
+      }
+    } catch (error) {
+      console.log("Error deleting note:", error);
+      toast.error("Gagal menghapus note");
+    }
+  };
+
   return (
     <main className="flex flex-col gap-5">
       <div className="w-full justify-end flex">
         <Dialog open={createDialog} onOpenChange={setCreateDialog}>
           <DialogTrigger asChild>
-            <Button>Add Note</Button>
+            <Button className="cursor-pointer">Add Note</Button>
           </DialogTrigger>
           <DialogContent>
             <form onSubmit={handleAddNote} className="space-y-4">
@@ -119,10 +138,17 @@ const NotePages = () => {
               <h1 className="font-bold text-2xl">{note.judul}</h1>
               <p>{note.deskripsi}</p>
             </div>
-            <div className="w-full flex justify-end gap-1">
+            <div className="w-full flex justify-between gap-1">
               <p>
                 {note.name} | {formatDate(note.created_at)}
               </p>
+              <Button
+                variant="destructive"
+                className="cursor-pointer"
+                onClick={() => handleDeleteNote(note.id)}
+              >
+                Delete
+              </Button>
             </div>
           </div>
         ))}
