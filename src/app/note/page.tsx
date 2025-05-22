@@ -15,6 +15,7 @@ const NotePages = () => {
       else setNotes(data);
     };
     fetchNotes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [supabase]);
 
   console.log(notes);
