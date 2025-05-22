@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   Layers,
   Weight,
+  PencilRuler,
   Popcorn,
 } from "lucide-react";
 import Image from "next/image";
@@ -39,6 +40,11 @@ const items: SidebarItem[] = [
     name: "Mass Converter",
     path: "/converter",
     icon: Weight,
+  },
+  {
+    name: "Note",
+    path: "/note",
+    icon: PencilRuler,
   },
   {
     name: "Snack",

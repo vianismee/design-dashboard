@@ -103,12 +103,12 @@ export default function Converter() {
               </Select>
             </div>
           </div>
-          <div className="flex flex-col w-[50%] p-2 font-bold gap-2">
+          <div className="flex flex-col w-[50%] p-2 font-bold gap-2 justify-center">
             <h1 className="font-medium text-black/60">Hasil Konversi</h1>
-            <Input
-              className="h-full items-center flex"
-              value={`${convertValue} ${toUnit}`}
-            />
+            <p className="items-center text-[14pt]">
+              {convertValue} {""}
+              {toUnit}
+            </p>
           </div>
         </div>
       </div>

@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Gunakan Supabase sebagai database
+}
+
+model Packaging {
+  id           Int     @id @default(autoincrement())
+  name         String
+  type         String
+  labelKemasan String
+  innerbox     String?
+  labelBulat   String?
+}

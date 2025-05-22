@@ -33,11 +33,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex flex-wrap">
+        <div className="flex">
           <div className="w-[15%] h-screen ">
             <Sidebar />
           </div>
-          <div className="grow h-screen flex flex-col">
+          <div className=" w-full h-screen flex flex-col">
             <Headers />
             <div className="overflow-x-scroll bg-sky-100 rounded-2xl scrollbar-hide h-full px-[25px] py-[25px]">
               {children}
