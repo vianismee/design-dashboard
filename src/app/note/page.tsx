@@ -20,6 +20,8 @@ import { toast } from "sonner";
 const NotePages = () => {
   const [notes, setNotes] = useState<INote[]>([]);
   const [createDialog, setCreateDialog] = useState(false);
+  const [editDialog, setEditDialog] = useState(false);
+  const [currentNote, setCurrentNote] = useState<INote | null>(null);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -29,6 +31,7 @@ const NotePages = () => {
       else setNotes(data);
     };
     fetchNotes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [supabase]);
 
   const formatDate = (dateStr: string) => {
@@ -63,6 +66,34 @@ const NotePages = () => {
     }
   };
 
+  const handleUpdateNote = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!currentNote) return;
+
+    const formData = new FormData(e.currentTarget);
+    const updateData = Object.fromEntries(formData);
+
+    try {
+      const { data, error } = await supabase
+        .from("notes")
+        .update(updateData)
+        .eq("id", currentNote.id)
+        .select();
+      if (error) console.log("error:", error);
+      else {
+        if (data) {
+          setNotes((prev) =>
+            prev.map((note) => (note.id === currentNote.id ? data[0] : note))
+          );
+        }
+        toast("Note Berhasil diperbarui");
+        setEditDialog(false);
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+
   const handleDeleteNote = async (noteId: number) => {
     try {
       const { error } = await supabase.from("notes").delete().eq("id", noteId);
@@ -77,6 +108,11 @@ const NotePages = () => {
       console.log("Error deleting note:", error);
       toast.error("Gagal menghapus note");
     }
+  };
+
+  const openEditDialog = (note: INote) => {
+    setCurrentNote(note);
+    setEditDialog(true);
   };
 
   return (
@@ -125,6 +161,8 @@ const NotePages = () => {
           </DialogContent>
         </Dialog>
       </div>
+
+      {/* Display Notes */}
       <div className="flex gap-[2%] flex-wrap w-full space-y-[30px]">
         {notes.map((note) => (
           <div
@@ -139,13 +177,74 @@ const NotePages = () => {
               <p>
                 {note.name} | {formatDate(note.created_at)}
               </p>
-              <Button
-                variant="destructive"
-                className="cursor-pointer"
-                onClick={() => handleDeleteNote(note.id)}
-              >
-                Delete
-              </Button>
+              <div className="flex justify-center items-center gap-4">
+                <Dialog open={editDialog} onOpenChange={setEditDialog}>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="secondary"
+                      className="cursor-pointer"
+                      onClick={() => openEditDialog(note)}
+                    >
+                      Edit
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <form onSubmit={handleUpdateNote} className="space-y-4">
+                      <DialogTitle>Edit Catatan</DialogTitle>
+                      <div className="flex flex-col gap-6">
+                        {currentNote && (
+                          <>
+                            <div className="flex flex-col gap-2">
+                              <Label htmlFor="name">Nama</Label>
+                              <Input
+                                id="name"
+                                name="name"
+                                defaultValue={currentNote.name}
+                                required
+                                placeholder="Input Nama"
+                              />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                              <Label htmlFor="judul">Judul</Label>
+                              <Input
+                                name="judul"
+                                defaultValue={currentNote.judul}
+                                required
+                                placeholder="Judul Note"
+                              />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                              <Label htmlFor="deskripsi">Deskripsi</Label>
+                              <Textarea
+                                id="deskripsi"
+                                name="deskripsi"
+                                defaultValue={currentNote.deskripsi}
+                                required
+                                className="resize-none"
+                              />
+                            </div>
+                          </>
+                        )}
+                      </div>
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button variant={"secondary"}>Close</Button>
+                        </DialogClose>
+                        <Button type="submit" className="cursor-pointer">
+                          Update
+                        </Button>
+                      </DialogFooter>
+                    </form>
+                  </DialogContent>
+                </Dialog>
+                <Button
+                  variant="destructive"
+                  className="cursor-pointer"
+                  onClick={() => handleDeleteNote(note.id)}
+                >
+                  Delete
+                </Button>
+              </div>
             </div>
           </div>
         ))}
