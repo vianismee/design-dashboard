@@ -171,7 +171,7 @@ const NotePages = () => {
           >
             <div className="flex flex-col gap-2">
               <h1 className="font-bold text-2xl">{note.judul}</h1>
-              <p>{note.deskripsi}</p>
+              <p className="whitespace-pre-line">{note.deskripsi}</p>
             </div>
             <div className="w-full flex justify-between gap-1">
               <p>
